@@ -18,11 +18,26 @@ CharacterManager/
 │               └── model/
 │                   ├── Character.java
 │                   └── CharacterType.java
+│                   └── CharacterManager.java
 └── README.md
 ```
 
-## Identitas Mahasiswa
+# TP5-AP6 Fitur Baru: Pencarian Karakter Terkuat (findStrongest)
+1. Rasional / Alasan Fitur
+Dalam pengembangan sebuah game atau sistem RPG, mengetahui entitas atau karakter mana yang memiliki statistik tertinggi (terkuat) merupakan fitur analisis data yang sangat krusial. Fitur findStrongest() ditambahkan untuk mempermudah sistem dalam menyaring karakter dengan daya serang (attackPower) paling mendominasi tanpa mengharuskan layer aplikasi melakukan pengurutan (sorting) manual di sisi luar.
 
-* Nama Lengkap: Yugas Bintang Bimantara harefa
-* NIM: 253303621229
-* Link Google Docs: https://docs.google.com/document/d/13VmEHhD6g9jfoNQVd79ebY7AujzoQrAAqYsLhu1JZDE/edit?usp=sharing
+2. Menjaga Prinsip OOP & Enkapsulasi
+Defensive Design: Method mengembalikan satu objek Character tunggal atau nilai null apabila sistem belum memiliki data karakter sama sekali.
+No Information Leakage: Struktur data internal ArrayList<Character> characterList milik CharacterManager tetap terkunci rapat di dalam class (private). Akses luar murni hanya mendapatkan hasil kalkulasi/pencarian objek spesifik tanpa diberi celah untuk memodifikasi atau menambah isi list secara ilegal.
+
+Screenshot Output Terminal ap6
+![alt text](<../Output Image/Screenshot (21).png>)
+![alt text](<../Output Image/Screenshot (22).png>)
+![alt text](<../Output Image/Screenshot (23).png>)
+![alt text](<../Output Image/Screenshot (24).png>)
+
+Identitas Mahasiswa
+Nama Lengkap: Yugas Bintang Bimantara harefa
+NIM: 253303621229
+Link Google Docs ap3: https://docs.google.com/document/d/13VmEHhD6g9jfoNQVd79ebY7AujzoQrAAqYsLhu1JZDE/edit?usp=sharing
+Link Google Docs ap6: https://docs.google.com/document/d/1-aIZ3DACbzdOY9E0Q-ihezBbM8uxdzWK4TRoRQpNqqI/edit?usp=sharing
