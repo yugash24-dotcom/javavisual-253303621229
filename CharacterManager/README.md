@@ -15,7 +15,7 @@ Dalam pengembangan sebuah game atau sistem RPG, mengetahui entitas atau karakter
 Defensive Design: Method mengembalikan satu objek Character tunggal atau nilai null apabila sistem belum memiliki data karakter sama sekali.
 No Information Leakage: Struktur data internal ArrayList<Character> characterList milik CharacterManager tetap terkunci rapat di dalam class (private). Akses luar murni hanya mendapatkan hasil kalkulasi/pencarian objek spesifik tanpa diberi celah untuk memodifikasi atau menambah isi list secara ilegal.
 
-## Screenshot Output Terminal TP5-AP
+## Screenshot Output Terminal TP5-AP6
 ![alt text](<../Output Image/Screenshot (21).png>)
 ![alt text](<../Output Image/Screenshot (22).png>)
 ![alt text](<../Output Image/Screenshot (23).png>)
@@ -45,14 +45,27 @@ Dalam pengembangan sebuah game atau sistem RPG, mengetahui entitas atau karakter
 Defensive Design: Method mengembalikan satu objek Character tunggal atau nilai null apabila sistem belum memiliki data karakter sama sekali.
 No Information Leakage: Struktur data internal ArrayList<Character> characterList milik CharacterManager tetap terkunci rapat di dalam class (private). Akses luar murni hanya mendapatkan hasil kalkulasi/pencarian objek spesifik tanpa diberi celah untuk memodifikasi atau menambah isi list secara ilegal.
 
-Screenshot Output Terminal ap6
+## Screenshot Output Terminal TP5-AP6
 ![alt text](<../Output Image/Screenshot (21).png>)
 ![alt text](<../Output Image/Screenshot (22).png>)
 ![alt text](<../Output Image/Screenshot (23).png>)
 ![alt text](<../Output Image/Screenshot (24).png>)
+
+# TP8-AP10 Character Manager GUI dan Statistik Karakter
+1. Aliran Data dan Penerapan MVC
+Aliran data aplikasi dimulai dari Main.java, yang membuat objek Character dan menambahkan data karakter ke CharacterManager. Selanjutnya, Main.java mengambil daftar karakter melalui method getAllCharacters() dan mengirimkannya ke MainWindow untuk ditampilkan dalam antarmuka Java Swing. Dalam konsep MVC, package model bertanggung jawab terhadap data dan logika karakter, sedangkan MainWindow berperan sebagai bagian View yang menampilkan data kepada pengguna. Main.java mengatur proses inisialisasi dan menghubungkan Model dengan View, sementara statistik rata-rata level dihitung berdasarkan daftar karakter yang diterima oleh View.
+
+2. Karakter Baru dan Alasan Pemilihan Tipe/Level
+Dua karakter baru ditambahkan untuk memenuhi kebutuhan minimal lima karakter sekaligus memberikan variasi tipe dan level pada aplikasi. Srikandi — ARCHER, Level 2: Dipilih sebagai karakter pemanah dengan level awal yang relatif rendah untuk menunjukkan variasi statistik pada karakter yang masih berkembang. Bima — WARRIOR, Level 6: Dipilih sebagai karakter petarung dengan level lebih tinggi untuk memberikan perbandingan statistik dengan karakter berlevel rendah serta membantu menguji perhitungan rata-rata level. Penambahan karakter dengan tipe dan level yang berbeda memungkinkan aplikasi menampilkan data yang lebih bervariasi dan menguji apakah statistik rata-rata level dihitung berdasarkan seluruh karakter secara akurat.
+
+## Screenshot Output Terminal TP8-AP10
+![alt text](<../Output Image/Screenshot (26).png>)
+![alt text](<../Output Image/Screenshot (27).png>)
+![alt text](<../Output Image/Screenshot (29).png>)
 
 Identitas Mahasiswa
 Nama Lengkap: Yugas Bintang Bimantara harefa
 NIM: 253303621229
 Link Google Docs ap3: https://docs.google.com/document/d/13VmEHhD6g9jfoNQVd79ebY7AujzoQrAAqYsLhu1JZDE/edit?usp=sharing
 Link Google Docs ap6: https://docs.google.com/document/d/1-aIZ3DACbzdOY9E0Q-ihezBbM8uxdzWK4TRoRQpNqqI/edit?usp=sharing
+Link Google Docs ap10: https://docs.google.com/document/d/1vV4PF-lDXRdZbCN6OllHVbcmdEmTuXkokU2j73zBoT0/edit?usp=sharing
