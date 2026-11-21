@@ -30,10 +30,13 @@ CharacterManager/
 │   └── com/
 │       └── unpri/
 │           └── charactermanager/
-│               └── model/
-│                   ├── Character.java
-│                   └── CharacterType.java
-│                   └── CharacterManager.java
+│               ├── model/
+│               │   ├── Character.java
+│               │   └── CharacterType.java
+│               │   └── CharacterManager.java
+│               └── view/
+│                   ├── AppThema.java
+│                   └── MainWindow.java
 └── README.md
 ```
 
