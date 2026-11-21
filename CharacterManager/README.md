@@ -6,6 +6,21 @@ Aplikasi ini adalah sistem manajemen karakter sederhana berbasis teks (Console-b
 ![alt text](<../Output Image/Screenshot (1).png>)
 ![alt text](<../Output Image/Screenshot (7).png>)
 
+# TP5-AP6 Fitur Baru: Pencarian Karakter Terkuat (findStrongest)
+
+1. Rasional / Alasan Fitur
+Dalam pengembangan sebuah game atau sistem RPG, mengetahui entitas atau karakter mana yang memiliki statistik tertinggi (terkuat) merupakan fitur analisis data yang sangat krusial. Fitur findStrongest() ditambahkan untuk mempermudah sistem dalam menyaring karakter dengan daya serang (attackPower) paling mendominasi tanpa mengharuskan layer aplikasi melakukan pengurutan (sorting) manual di sisi luar.
+
+2. Menjaga Prinsip OOP & Enkapsulasi
+Defensive Design: Method mengembalikan satu objek Character tunggal atau nilai null apabila sistem belum memiliki data karakter sama sekali.
+No Information Leakage: Struktur data internal ArrayList<Character> characterList milik CharacterManager tetap terkunci rapat di dalam class (private). Akses luar murni hanya mendapatkan hasil kalkulasi/pencarian objek spesifik tanpa diberi celah untuk memodifikasi atau menambah isi list secara ilegal.
+
+## Screenshot Output Terminal TP5-AP
+![alt text](<../Output Image/Screenshot (21).png>)
+![alt text](<../Output Image/Screenshot (22).png>)
+![alt text](<../Output Image/Screenshot (23).png>)
+![alt text](<../Output Image/Screenshot (24).png>)
+
 ## Struktur Folder Project
 
 ```text
