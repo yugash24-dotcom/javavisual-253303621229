@@ -164,6 +164,10 @@ Jendela Dikecilkan (Minimized / Vertikal Scrollbar Aktif):
 ## 4. Analisis Kompromi Arsitektur Sementara (MVC)
 Pada tahap pengembangan ini, penanganan aksi tombol pada `CharacterFormPanel` masih menggunakan `ActionListener` minimal berbasis lambda yang langsung memanggil `manager.addCharacter()` serta callback `Runnable` untuk memicu `refreshList()` di `MainWindow`. Pendekatan ini merupakan kompromi sementara agar integrasi antara form input dan pembaruan tampilan dapat berjalan ringkas tanpa menambah lapisan kelas Controller terpisah. Meskipun secara fungsional efektif, pemanggilan `CharacterManager` secara langsung dari dalam komponen View membuat `CharacterFormPanel` memiliki ketergantungan (*coupling*) terhadap struktur Model. Pada tahap pengembangan berikutnya, logika alur penambahan dan pembaruan daftar ini idealnya dipindahkan ke kelas Controller khusus agar pemisahan tanggung jawab (*Separation of Concerns*) dalam pola MVC benar-benar murni.
 
+## Screenshot Output Terminal ap19
+![alt text](<../Output Image/Screenshot (70).png>)
+![alt text](<../Output Image/Screenshot (71).png>)
+
 Identitas Mahasiswa
 Nama Lengkap: Yugas Bintang Bimantara harefa
 NIM: 253303621229
