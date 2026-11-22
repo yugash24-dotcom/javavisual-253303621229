@@ -1,5 +1,4 @@
 # TP3-AP3 Character Manager (Java Visual SIH-6406)
-
 Aplikasi ini adalah sistem manajemen karakter sederhana berbasis teks (Console-based Game Character Manager) yang dibangun menggunakan bahasa pemrograman Java. Proyek ini menerapkan prinsip Pemrograman Berorientasi Objek (OOP), khususnya enkapsulasi (Encapsulation) dengan pembatasan hak akses atribut menggunakan setter, getter, serta fungsi validasi nilai logika. Sistem juga mendukung kalkulasi otomatis status karakter (HP dan Attack) berdasarkan level serta fitur pelacakan kondisi hidup/mati karakter.
 
 ## Screenshot Output Terminal TP3-AP3
@@ -7,7 +6,6 @@ Aplikasi ini adalah sistem manajemen karakter sederhana berbasis teks (Console-b
 ![alt text](<../Output Image/Screenshot (7).png>)
 
 # TP5-AP6 Fitur Baru: Pencarian Karakter Terkuat (findStrongest)
-
 1. Rasional / Alasan Fitur
 Dalam pengembangan sebuah game atau sistem RPG, mengetahui entitas atau karakter mana yang memiliki statistik tertinggi (terkuat) merupakan fitur analisis data yang sangat krusial. Fitur findStrongest() ditambahkan untuk mempermudah sistem dalam menyaring karakter dengan daya serang (attackPower) paling mendominasi tanpa mengharuskan layer aplikasi melakukan pengurutan (sorting) manual di sisi luar.
 
@@ -36,6 +34,7 @@ CharacterManager/
 │               │   └── CharacterManager.java
 │               └── view/
 │                   ├── AppThema.java
+│                   └── CharacterFormPanel.java
 │                   └── MainWindow.java
 └── README.md
 ```
@@ -85,7 +84,7 @@ Sebelum
 Sesudah
 ![alt text](<../Output Image/Screenshot (34).png>)
 
-## TP13-AP16 Dokumentasi Pembaruan GUI, Manajemen Tema & Pengembangan Antarmuka Grafis Terstruktur (v0.5)
+# TP13-AP16 Dokumentasi Pembaruan GUI, Manajemen Tema & Pengembangan Antarmuka Grafis Terstruktur (v0.5)
 Analisis Pemilihan Layout Antarmuka (v0.5)
 1. Mengapa GridLayout (2x2) Dipilih untuk Panel Statistik?
 Alasan Desain: Panel statistik menyajikan 4 metrik ringkas informasi metadata aplikasi. GridLayout(2, 2) dipilih karena memaksa setiap grid component memiliki ukuran kotak yang seragam secara simetris, menghasilkan visual baris-kolom yang sangat rapi untuk widget data ringkas. Ketika aplikasi dilebarkan secara horizontal, grid akan meregang merata mengikuti dinamika ukuran jendela tanpa merusak struktur baris.
@@ -122,6 +121,49 @@ Jendela Dilebarkan (Maximized / Resized Large):
 Jendela Dikecilkan (Minimized / Vertikal Scrollbar Aktif):
 ![alt text](<../Output Image/Screenshot (49).png>)
 
+# TP14-AP19 Dokumentasi Form Input, Validasi Berlapis & Pengujian Interaktif
+## 1. Screenshot Hasil Pengujian Form GUI
+1. **Validasi Error Nama Kosong (Border Merah & Fokus Kembali):**
+   ![Error Nama Kosong](<../Output Image/Screenshot_TP14_Error_Kosong.png>)
+
+2. **Validasi Error Nama Duplikat (Pengecekan Keunikan via `isNameTaken()`):**
+   ![Error Nama Duplikat](<../Output Image/Screenshot_TP14_Error_Duplikat.png>)
+
+3. **Sukses Menambahkan Karakter Baru (Kartu Muncul & Statistik Ter-update):**
+   ![Sukses Tambah Karakter](<../Output Image/Screenshot_TP14_Sukses.png>)
+
+---
+
+## 2. Mekanisme Mini-Challenge & Aturan Validasi Baru
+* **Mini-Challenge (Batasan Level `MAGE` Maksimal 60 — Lapisan Model):**
+  Aturan bahwa karakter bertipe `MAGE` tidak boleh memiliki level di atas 60 diletakkan sepenuhnya pada konstruktor dan `setLevel()` di kelas `Character`. Ketika kondisi dilanggar, Model melempar `IllegalArgumentException` yang langsung ditangkap oleh blok `try-catch` pada `CharacterFormPanel` untuk ditampilkan di label error tanpa perlu mengubah struktur kode form.
+* **Aturan Tambahan 1 — Larangan Kata Terlarang Sistem (`Admin`, `System`, `GM`) di Model (`Character.java`):**
+  *Alasan:* Aturan ini menjaga integritas data domain agar tidak ada karakter yang menyerupai identitas pengelola sistem, baik saat dibuat lewat antarmuka GUI maupun lewat kode backend.
+* **Aturan Tambahan 2 — Batas Maksimal Kapasitas Daftar 20 Karakter di Model (`CharacterManager.java`):**
+  *Alasan:* Pengelolaan batas ukuran koleksi (`characterList`) merupakan tanggung jawab langsung pengelola data (`CharacterManager`), sehingga pembatasan slot tetap konsisten dari mana pun method `addCharacter()` dipanggil.
+
+---
+
+## 3. Tabel Pengujian Validasi (Bagian B) & Catatan Perbaikan
+
+| No | Input (Nama, Role, Level) | Hasil Diharapkan | Hasil Nyata | Lapisan yang Menangkap | Catatan Perbedaan & Tindakan Perbaikan |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | `""` (kosong), `WARRIOR`, `5` | Ditolak dengan pesan nama wajib diisi, border merah, fokus ke field nama | Muncul `⚠ Nama karakter wajib diisi!`, border merah, fokus kembali ke field nama | **View** (`CharacterFormPanel.validateName`) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 2 | `"Al"`, `ARCHER`, `10` | Ditolak karena panjang nama kurang dari 3 karakter | Muncul `⚠ Panjang nama harus antara 3 hingga 20 karakter!` | **View** (`CharacterFormPanel.validateName`) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 3 | `"Srikandi@99"`, `HEALER`, `12` | Ditolak karena mengandung simbol `@` | Muncul `⚠ Format nama hanya boleh berisi huruf, angka, spasi, atau underscore!` | **View** (`CharacterFormPanel.validateName`) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 4 | `"Arjuna"`, `WARRIOR`, `15` | Ditolak karena nama sudah terdaftar (cek *case-insensitive*) | Muncul `⚠ Nama 'Arjuna' sudah digunakan oleh karakter lain!` | **View** (`CharacterFormPanel` + `isNameTaken`) | Awalnya pengecekan memakai `equals()` yang sensitif huruf besar/kecil sehingga `"arjuna"` sempat lolos; diperbaiki dengan `equalsIgnoreCase()`. |
+| 5 | `"Gandalf"`, `MAGE`, `61` | Ditolak oleh Model karena MAGE maksimal level 60 | Muncul `⚠ Role MAGE tidak boleh memiliki level di atas 60!` | **Model** (`Character` Constructor) | Sesuai harapan. Pesan Model otomatis tampil di form tanpa mengubah `CharacterFormPanel`. |
+| 6 | `"Gandalf"`, `MAGE`, `60` | Diterima karena tepat di batas maksimal level MAGE (`60`) | Karakter tampil di daftar kartu, statistik ter-update, form ter-reset | **Lolos Validasi** (View & Model) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 7 | `"Admin"`, `WARRIOR`, `25` | Ditolak karena menggunakan nama cadangan sistem | Muncul `⚠ Nama 'Admin' dicadangkan oleh sistem!` | **Model** (`Character` Constructor) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 8 | `"  Srikandi  "`, `ARCHER`, `20` | Spasi di awal/akhir dipangkas (`trim()`), karakter diterima | Tersimpan sebagai `"Srikandi"` di daftar dan rata-rata level diperbarui | **Lolos Validasi** (View & Model) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 9 | `"Ksatria21"`, `WARRIOR`, `50` (saat list berisi 20 karakter) | Ditolak karena kapasitas daftar penuh (maksimal 20) | Muncul `⚠ Kapasitas daftar penuh! Maksimal 20 karakter.` | **Model** (`CharacterManager.addCharacter`) | Sesuai harapan. Tidak diperlukan perbaikan. |
+| 10 | `"Budi"`, `MAGE`, `150` (diketik manual pada `JSpinner`) | Ditolak karena level di luar rentang `1–99` | Muncul `⚠ Level tidak valid! Masukkan angka bulat 1–99.` | **View** (`JSpinner.commitEdit`) | Sebelumnya nilai ketikan manual pada spinner tidak terbaca; diperbaiki dengan memanggil `spnLevel.commitEdit()` sebelum mengambil nilai. |
+
+---
+
+## 4. Analisis Kompromi Arsitektur Sementara (MVC)
+Pada tahap pengembangan ini, penanganan aksi tombol pada `CharacterFormPanel` masih menggunakan `ActionListener` minimal berbasis lambda yang langsung memanggil `manager.addCharacter()` serta callback `Runnable` untuk memicu `refreshList()` di `MainWindow`. Pendekatan ini merupakan kompromi sementara agar integrasi antara form input dan pembaruan tampilan dapat berjalan ringkas tanpa menambah lapisan kelas Controller terpisah. Meskipun secara fungsional efektif, pemanggilan `CharacterManager` secara langsung dari dalam komponen View membuat `CharacterFormPanel` memiliki ketergantungan (*coupling*) terhadap struktur Model. Pada tahap pengembangan berikutnya, logika alur penambahan dan pembaruan daftar ini idealnya dipindahkan ke kelas Controller khusus agar pemisahan tanggung jawab (*Separation of Concerns*) dalam pola MVC benar-benar murni.
+
 Identitas Mahasiswa
 Nama Lengkap: Yugas Bintang Bimantara harefa
 NIM: 253303621229
@@ -130,3 +172,4 @@ Link Google Docs ap6: https://docs.google.com/document/d/1-aIZ3DACbzdOY9E0Q-ihez
 Link Google Docs ap10: https://docs.google.com/document/d/1vV4PF-lDXRdZbCN6OllHVbcmdEmTuXkokU2j73zBoT0/edit?usp=sharing
 Link Google Docs ap13: https://docs.google.com/document/d/1EY9-Iq5pRXuauOWAT54PxH7yV7AS5vSO60K-7qbM4_M/edit?usp=sharing
 Link Google Docs ap16: https://docs.google.com/document/d/1JgWPDFcWPl2-3WdPWqxeYHpDCuINMZsC-7nUXxxvOpE/edit?usp=sharing
+Link Google Docs ap19: https://docs.google.com/document/d/1B14kNthC2oV4UBlEtoNWuQRv6chxjZQuUGh4wtAVJRE/edit?usp=sharing
